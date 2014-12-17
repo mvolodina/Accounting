@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Account" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LOCALHOST\SQLEXPRESS;Initial Catalog=Account;Integrated Security=True;Pooling=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AccountConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Material" Member="Material">
+    <Type Name="Material">
+      <Column Name="Id_mat" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Material_Orders" Member="Orders" ThisKey="Id_mat" OtherKey="FK_Mat1" Type="Orders" />
+      <Association Name="Material_Storage" Member="Storage" ThisKey="Id_mat" OtherKey="FK_mat" Type="Storage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Supplier" Member="Supplier">
+    <Type Name="Supplier">
+      <Column Name="Id_sup" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Phone" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="[E-mail]" Member="E_mail" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Supplier_Orders" Member="Orders" ThisKey="Id_sup" OtherKey="FK_Sup" Type="Orders" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Orders" Member="Orders">
+    <Type Name="Orders">
+      <Column Name="Id_ord" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_Mat1" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_Sup" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Material_Orders" Member="Material" ThisKey="FK_Mat1" OtherKey="Id_mat" Type="Material" IsForeignKey="true" />
+      <Association Name="Supplier_Orders" Member="Supplier" ThisKey="FK_Sup" OtherKey="Id_sup" Type="Supplier" IsForeignKey="true" />
+      <Association Name="Status_Orders" Member="Status1" ThisKey="Status" OtherKey="Id" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="[ name]" Member="_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="Status_Orders" Member="Orders" ThisKey="Id" OtherKey="Status" Type="Orders" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Storage" Member="Storage">
+    <Type Name="Storage">
+      <Column Name="Id_st" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FK_mat" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Material_Storage" Member="Material" ThisKey="FK_mat" OtherKey="Id_mat" Type="Material" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

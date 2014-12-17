@@ -1,0 +1,39 @@
+﻿@model Accounting.DAO.AspNetUserRoles
+
+@{
+    ViewBag.Title = "SetRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SetRole</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>AspNetUserRoles</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.UserId)
+        @{
+          List<SelectListItem> list = new List<SelectListItem>();
+          Accounting.DAO.AspNetRoles[] roles = new Accounting.DAO.UsersRoleDAO().Select().ToArray();
+          foreach (Accounting.DAO.AspNetRoles item in roles)
+          {
+              list.Add(new SelectListItem() { Value = item.Id, Text = item.Name });
+          }
+          }
+        @Html.DropDownListFor(itemModel => Model.RoleId, list);
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

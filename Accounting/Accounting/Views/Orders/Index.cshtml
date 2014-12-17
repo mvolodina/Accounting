@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Accounting.DAO.Orders>
+
+@{
+    ViewBag.Title = "Заказы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Заказы</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Название")
+        </th>
+        <th>
+            @Html.DisplayName("Количество")
+        </th>
+        <th>
+            @Html.DisplayName("Поставщик")
+        </th>
+        <th>
+            @Html.DisplayName("Статус")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Where(x => x.Status == 1)) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Material.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status1._name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_ord }) |
+            @Html.ActionLink("Выполнен", "Complite", new { id = item.Id_ord }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_ord })
+        </td>
+    </tr>
+}
+    @foreach (var item in Model.Where(x => x.Status == 2)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status1._name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id_ord }) |
+                @Html.ActionLink("Выполнен", "Complite", new { id = item.Id_ord }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id_ord })
+            </td>
+        </tr>
+}
+    @foreach (var item in Model.Where(x => x.Status == 3)) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Material.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status1._name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id_ord }) |
+                @Html.ActionLink("Выполнен", "Complite", new { id = item.Id_ord }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id_ord })
+            </td>
+        </tr>
+}
+
+</table>
